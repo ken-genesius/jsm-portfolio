@@ -74,7 +74,7 @@ const Header = () => {
             images.csharp,
           ].map((circle, index) => (
             <div className="circle-cmp app__flex" key={`circle-${index}`}>
-              <img src={circle} alt="circle" />
+              <img src={circle} alt="top-skills" />
             </div>
           ))}
         </div>
