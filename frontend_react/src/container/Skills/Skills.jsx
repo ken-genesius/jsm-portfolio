@@ -70,49 +70,6 @@ const Skills = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* <motion.div className="app__skills-exp">
-          {experience.map((exp) => (
-            <motion.div
-              className='app__skills-exp-item'
-              key={exp.year}
-            >
-              <div className='app__skills-exp-year'>
-                <p className='bold-text'>{exp.year}</p>
-              </div>
-              <motion.div className="app__skills-exp-works">
-                {exp.works.map((work, index) => (
-                  <React.Fragment key={work.name}>
-                    <motion.div
-                      whileInView={{ opacity: [0, 1] }}
-                      transition={{ duration: 0.5 }}
-                      className='app__skills-exp-work'
-                      id={`app__skills-exp-work-${exp.year}-${index}`}
-                      data-tip
-                      data-for={work.name}
-                    >
-                        <h4 className='bold-text'>
-                          {work.name}
-                        </h4>
-                        <p className='p-text'>
-                          {work.company}
-                        </p>
-                    </motion.div>
-                    <Tooltip
-                      anchorSelect={`#app__skills-exp-work-${exp.year}-${index}`}
-                      id={work.name}
-                      place="right"
-                      arrowColor="#000"
-                      className="skills-tooltip"
-                    >
-                      {work.desc}
-                    </Tooltip>
-                  </React.Fragment>
-                ))}
-              </motion.div>  
-            </motion.div>
-          ))}
-        </motion.div> */}
       </div>
     </>
   );

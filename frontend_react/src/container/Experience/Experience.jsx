@@ -4,66 +4,12 @@ import {
 } from "react-vertical-timeline-component";
 import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { images } from "../../constants";
+import { urlFor, client } from "../../client";
 
 import "react-vertical-timeline-component/style.min.css";
 import "./Experience.scss";
-
-const experiences = [
-  {
-    title: "React.js Developer",
-    company_name: "Starbucks",
-    icon: images.starbucks,
-    iconBg: "var(--primary-color)",
-    date: "March 2020 - April 2021",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "React Native Developer",
-    company_name: "Tesla",
-    icon: images.tesla,
-    iconBg: "var(--primary-color)",
-    date: "Jan 2021 - Feb 2022",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Web Developer",
-    company_name: "Shopify",
-    icon: images.shopify,
-    iconBg: "var(--primary-color)",
-    date: "Jan 2022 - Jan 2023",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Full stack Developer",
-    company_name: "Meta",
-    icon: images.meta,
-    iconBg: "var(--primary-color)",
-    date: "Jan 2023 - Present",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-];
 
 const textVariant = (delay) => {
   return {
@@ -101,13 +47,13 @@ const ExperienceCard = ({ experience }) => (
     }}
     icon={
       <div className="app__experience-timeline-icon">
-        <img src={experience.icon} alt={experience.company_name} />
+        <img src={urlFor(experience.icon)} alt={experience.companyName} />
       </div>
     }
   >
     <div className="app__experience-timeline-element-head">
       <h3>{experience.title}</h3>
-      <p>{experience.company_name}</p>
+      <p>{experience.companyName}</p>
       <p className="app__experience-timeline-date">{experience.date}</p>
     </div>
 
@@ -120,6 +66,16 @@ const ExperienceCard = ({ experience }) => (
 );
 
 const Experience = () => {
+  const [experiences, setExperiences] = useState([]);
+
+  useEffect(() => {
+    const query = '*[_type == "experiencesV2"] | order(order desc)';
+
+    client.fetch(query).then((data) => {
+      setExperiences(data);
+    });
+  }, []);
+
   return (
     <>
       <motion.div variants={textVariant()}>
