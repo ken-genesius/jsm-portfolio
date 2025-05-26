@@ -3,6 +3,7 @@ import "./App.scss";
 import {
   About,
   Contact,
+  Experience,
   Header,
   Skills,
   Testimonials,
@@ -18,6 +19,7 @@ const App = () => {
       <About />
       <Work />
       <Skills />
+      <Experience />
       <Testimonials />
       <Contact />
     </div>

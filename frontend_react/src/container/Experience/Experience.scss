@@ -1,0 +1,56 @@
+.app__experience {
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+
+  .app__experience-timeline {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+
+    .app__experience-timeline-line {
+      .app__experience-timeline-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        img {
+          width: 80%;
+          height: 80%;
+          object-fit: contain;
+        }
+      }
+
+      .app__experience-timeline-element {
+        .app__experience-timeline-element-head {
+          h3 {
+            font-weight: bold;
+          }
+
+          p {
+            font-weight: 400;
+            margin: 0;
+          }
+
+          .app__experience-timeline-date {
+            font-size: 0.7rem;
+          }
+        }
+
+        .app__experience-timeline-element-list {
+          margin-top: 0.5rem;
+          list-style: disc;
+          margin-left: 1rem;
+
+          li {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            padding-left: 3px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,60 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Tooltip } from 'react-tooltip';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Tooltip } from "react-tooltip";
 
-import { AppWrap, MotionWrap } from '../../wrapper';
-import { urlFor, client } from '../../client';
-import './Skills.scss'
-
-
+import { AppWrap, MotionWrap } from "../../wrapper";
+import { urlFor, client } from "../../client";
+import "./Skills.scss";
 
 const Skills = () => {
-
   const [experience, setExperience] = useState([]);
 
   const [skills, setSkills] = useState([]);
+
+  const textVariant = (delay) => {
+    return {
+      hidden: {
+        y: -50,
+        opacity: 0,
+      },
+      show: {
+        y: 0,
+        opacity: 1,
+        transition: {
+          type: "spring",
+          duration: 1.25,
+          delay: delay,
+        },
+      },
+    };
+  };
 
   useEffect(() => {
     const query = '*[_type == "experiences"]';
     const skillsQuery = '*[_type == "skills"]';
 
-    client.fetch(query)
-      .then((data) => {
-        setExperience(data);
-      });
+    client.fetch(query).then((data) => {
+      setExperience(data);
+    });
 
-    client.fetch(skillsQuery)
-      .then((data) => {
-        setSkills(data);
-      });
+    client.fetch(skillsQuery).then((data) => {
+      setSkills(data);
+    });
   }, []);
 
   return (
     <>
-      <h2 className='head-text'>
-        Skills & Experience
-      </h2>
+      <motion.div variants={textVariant()}>
+        <p className="p-text">What I bring to the table</p>
+        <h2 className="head-text">
+          Skills & <span>Expertises</span>
+        </h2>
+      </motion.div>
 
-      <div className='app__skills-container'>
-        <motion.div
-          className='app__skills-list'
-        >
+      <div className="app__skills-container">
+        <motion.div className="app__skills-list">
           {skills.map((skill) => (
             <motion.div
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
-              className='app__skills-item app__flex'
+              className="app__skills-item app__flex"
               key={skill.name}
             >
-              <div className='app__flex' style={{ backgroundColor: skill.bgColor }}>
+              <div
+                className="app__flex"
+                style={{ backgroundColor: skill.bgColor }}
+              >
                 <img src={urlFor(skill.icon)} alt={skill.name} />
               </div>
-              <p className='p-text'>{skill.name}</p>
+              <p className="p-text">{skill.name}</p>
             </motion.div>
           ))}
         </motion.div>
 
-        <motion.div className="app__skills-exp">
+        {/* <motion.div className="app__skills-exp">
           {experience.map((exp) => (
             <motion.div
               className='app__skills-exp-item'
@@ -95,13 +112,14 @@ const Skills = () => {
               </motion.div>  
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </div>
     </>
-  )
-}
+  );
+};
 
 export default AppWrap(
-  MotionWrap(Skills, 'app__skills'), 
-  'skills',
-  'app__whitebg');
+  MotionWrap(Skills, "app__skills"),
+  "skills",
+  "app__whitebg"
+);
