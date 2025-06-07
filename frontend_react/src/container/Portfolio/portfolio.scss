@@ -1,0 +1,108 @@
+@import "../../App.scss";
+
+.app__portfolio {
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+
+  .app__portfolio-work {
+    position: relative;
+  }
+
+  .app__portfolio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .app__portfolio-wrapper {
+      max-width: 1366px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      gap: 50px;
+      align-items: center;
+      justify-content: center;
+
+      @include mobile {
+        flex-direction: column;
+      }
+
+      .app__portfolio-imageContainer {
+        flex: 1;
+        height: 50%;
+        padding: 0.75rem;
+        background-color: var(--primary-color);
+        border: 0.3rem solid #e5e7eb;
+        border-radius: 1.5rem;
+        box-shadow: 4px 4px 4px #ccc;
+
+        @include mobile {
+          padding: 0.3rem;
+          width: 100%;
+          max-height: 300px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 1rem;
+
+          @include mobile {
+            object-fit: cover;
+          }
+        }
+      }
+
+      .app__portfolio-textContainer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        @include mobile {
+          transform: none !important;
+          padding: 10px;
+          align-items: center;
+          text-align: center;
+        }
+
+        h2 {
+          font-size: 72px;
+          color: var(--secondary-color);
+
+          @include mobile {
+            font-size: 36px;
+          }
+        }
+
+        p {
+          color: var(--black-color);
+          font-size: 20px;
+
+          @include mobile {
+            font-size: 16px;
+          }
+        }
+
+        button {
+          background-color: var(--primary-color);
+          color: var(--secondary-color);
+          border: solid 2px var(--secondary-color);
+          border-radius: 10px;
+          padding: 10px;
+          width: 200px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+          }
+        }
+      }
+    }
+  }
+}

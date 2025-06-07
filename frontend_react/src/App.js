@@ -5,6 +5,7 @@ import {
   Contact,
   Experience,
   Header,
+  Portfolio,
   Skills,
   Testimonials,
   Work,
@@ -18,6 +19,7 @@ const App = () => {
       <Header />
       <About />
       <Work />
+      <Portfolio />
       <Skills />
       <Experience />
       <Testimonials />
