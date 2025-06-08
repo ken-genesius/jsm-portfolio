@@ -1,121 +1,10 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AppWrap, MotionWrap } from "../../wrapper";
-import StackIcon from "tech-stack-icons";
 import { MdStars } from "react-icons/md";
+import { urlFor, client } from "../../client";
 
 import "./portfolio.scss";
-
-const items = [
-  {
-    id: 1,
-    bgColor: "#84563f",
-    title: "React Commerce",
-    img: "https://images.pexels.com/photos/30872819/pexels-photo-30872819/free-photo-of-elegant-coffee-set-on-a-sunlit-table-in-ankara.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum libero enim nisi aliquam consectetur expedita magni eius ex corrupti animi! Ad nam pariatur assumenda quae mollitia libero repellat explicabo maiores?",
-    points: [
-      "Built a financial calculator to assist customers in determining credit card options.",
-      "Developed a user-friendly interface with Laravel and Tailwind.",
-      "Optimized the back-end logic for accuracy and efficiency.",
-    ],
-    url: "#",
-    stacks: [
-      {
-        title: "HTML5",
-        icon: "html5",
-      },
-      {
-        title: "JavaScript",
-        icon: "js",
-      },
-      {
-        title: "Bootstrap",
-        icon: "bootstrap4",
-      },
-    ],
-  },
-  {
-    id: 2,
-    bgColor: "#8ed2e9",
-    title: "Next.js Blog",
-    img: "https://images.pexels.com/photos/30600496/pexels-photo-30600496/free-photo-of-vibrant-in-n-out-burger-exterior-in-los-angeles.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum libero enim nisi aliquam consectetur expedita magni eius ex corrupti animi! Ad nam pariatur assumenda quae mollitia libero repellat explicabo maiores?",
-    url: "#",
-    points: [
-      "Built a financial calculator to assist customers in determining credit card options.",
-      "Developed a user-friendly interface with Laravel and Tailwind.",
-      "Optimized the back-end logic for accuracy and efficiency.",
-    ],
-    stacks: [
-      {
-        title: "HTML5",
-        icon: "html5",
-      },
-      {
-        title: "JavaScript",
-        icon: "js",
-      },
-      {
-        title: "Bootstrap",
-        icon: "bootstrap4",
-      },
-    ],
-  },
-  {
-    id: 3,
-    bgColor: "#c3ada0",
-    title: "Vanilla JS App",
-    img: "https://images.pexels.com/photos/30891641/pexels-photo-30891641/free-photo-of-luxury-desert-tents-in-omani-dunes.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum libero enim nisi aliquam consectetur expedita magni eius ex corrupti animi! Ad nam pariatur assumenda quae mollitia libero repellat explicabo maiores?",
-    url: "#",
-    points: [
-      "Built a financial calculator to assist customers in determining credit card options.",
-      "Developed a user-friendly interface with Laravel and Tailwind.",
-      "Optimized the back-end logic for accuracy and efficiency.",
-    ],
-    stacks: [
-      {
-        title: "HTML5",
-        icon: "html5",
-      },
-      {
-        title: "JavaScript",
-        icon: "js",
-      },
-      {
-        title: "Bootstrap",
-        icon: "bootstrap4",
-      },
-    ],
-  },
-  {
-    id: 4,
-    bgColor: "#b96c44",
-    title: "Music App",
-    img: "https://images.pexels.com/photos/31236777/pexels-photo-31236777/free-photo-of-traditional-chinese-architecture-with-modern-buildings.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum libero enim nisi aliquam consectetur expedita magni eius ex corrupti animi! Ad nam pariatur assumenda quae mollitia libero repellat explicabo maiores?",
-    url: "#",
-    points: [
-      "Built a financial calculator to assist customers in determining credit card options.",
-      "Developed a user-friendly interface with Laravel and Tailwind.",
-      "Optimized the back-end logic for accuracy and efficiency.",
-    ],
-    stacks: [
-      {
-        title: "HTML5",
-        icon: "html5",
-      },
-      {
-        title: "JavaScript",
-        icon: "js",
-      },
-      {
-        title: "Bootstrap",
-        icon: "bootstrap4",
-      },
-    ],
-  },
-];
 
 const Single = ({ item }) => {
   const ref = useRef();
@@ -153,7 +42,7 @@ const Single = ({ item }) => {
                   whileHover={{ y: "-20%" }}
                   transition={{ duration: 0.25 }}
                 >
-                  <img src={item.img} alt="" />
+                  <img src={urlFor(item.imgUrl)} alt="" />
                 </motion.div>
               </div>
             </div>
@@ -166,9 +55,10 @@ const Single = ({ item }) => {
                   className="app__portfolio-techstack"
                   key={item.id + "-" + tStack.title + "-" + index}
                 >
-                  <StackIcon
+                  <img
+                    src={urlFor(tStack.iconUrl)}
                     className="app__portfolio-techstack-icon"
-                    name={tStack.icon}
+                    alt={tStack.title}
                   />
                   <span className="app__portfolio-techstack-title">
                     {tStack.title}
@@ -196,6 +86,16 @@ const Single = ({ item }) => {
 };
 
 const Portfolio = () => {
+  const [portfolios, setPortfolios] = useState([]);
+
+  useEffect(() => {
+    const query = '*[_type == "portfolios"] | order(order asc)';
+
+    client.fetch(query).then((data) => {
+      setPortfolios(data);
+    });
+  }, []);
+
   const textVariant = (delay) => {
     return {
       hidden: {
@@ -235,8 +135,8 @@ const Portfolio = () => {
         </h2>
       </motion.div>
       <div className="app__portfolio-work" ref={ref}>
-        {items.map((item) => (
-          <Single item={item} key={item.id} />
+        {portfolios.map((portfolio, index) => (
+          <Single item={portfolio} key={index} />
         ))}
       </div>
     </>
