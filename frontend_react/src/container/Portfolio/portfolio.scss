@@ -1,0 +1,221 @@
+@import "../../App.scss";
+
+.app__portfolio {
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+
+  .app__portfolio-work {
+    position: relative;
+  }
+
+  .app__portfolio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .app__portfolio-wrapper {
+      max-width: 1366px;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      gap: 50px;
+      align-items: center;
+      justify-content: center;
+
+      @include mobile {
+        flex-direction: column;
+      }
+
+      .app__portfolio-section {
+        flex: 1;
+        height: 50%;
+        padding: 0.75rem;
+        background-color: var(--primary-color);
+        border: 0.3rem solid #e5e7eb;
+        border-radius: 1.5rem;
+        box-shadow: 4px 4px 4px #ccc;
+
+        @include mobile {
+          padding: 0.3rem;
+          width: 100%;
+          max-height: 300px;
+        }
+
+        .app__portfolio-section-portfolio {
+          position: relative;
+          border-radius: 1rem;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+
+          .app__portfolio-section-content {
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            justify-content: space-between;
+            gap: 0.75rem;
+
+            .app__portfolio-section-link {
+              padding: 2rem 1.25rem;
+              gap: 2rem;
+              width: 100%;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+              font-size: 1.25rem;
+              line-height: 1.75rem;
+              font-weight: 600;
+              text-decoration: none;
+              color: var(--white-color);
+            }
+
+            .app__portfolio-section-image {
+              display: flex;
+              width: 100%;
+              padding: 0 2.5rem;
+              position: absolute;
+              top: 40%;
+              left: 0;
+              bottom: -30%;
+
+              @include mobile {
+                top: 40%;
+              }
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 1.5rem;
+                box-shadow: 0px 0px 15px 1px #777;
+
+                @include mobile {
+                  object-fit: cover;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .app__portfolio-textContainer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        @include mobile {
+          transform: none !important;
+          padding: 10px;
+          align-items: center;
+          text-align: center;
+        }
+
+        h2 {
+          font-size: 60px;
+          color: var(--secondary-color);
+
+          @include mobile {
+            font-size: 36px;
+          }
+        }
+
+        p {
+          color: var(--black-color);
+          font-size: 20px;
+
+          @include mobile {
+            font-size: 16px;
+          }
+        }
+
+        .app__portfolio-techstack-container {
+          display: flex;
+          flex-direction: row;
+          gap: 0.5rem;
+          justify-content: flex-start;
+          align-items: flex-start;
+          width: 100%;
+
+          .app__portfolio-techstack {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 2rem;
+
+            .app__portfolio-techstack-icon {
+              width: 1rem;
+              height: 1rem;
+            }
+
+            .app__portfolio-techstack-title {
+              font-size: 1rem;
+              line-height: 1rem;
+            }
+          }
+        }
+
+        .app__portfolio-point-container {
+          display: flex;
+          flex-direction: column;
+          margin-top: 0.5rem;
+          width: 100%;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 0.5rem;
+
+          .app__portfolio-point {
+            display: flex;
+            gap: 1rem;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            .app__portfolio-point-icon {
+              color: var(--secondary-color);
+            }
+
+            .app__portfolio-point-span {
+              font-size: 1.05rem;
+
+              @include mobile {
+                font-size: 0.9rem;
+                text-align: start;
+              }
+            }
+          }
+        }
+
+        button {
+          background-color: var(--primary-color);
+          color: var(--secondary-color);
+          border: solid 2px var(--secondary-color);
+          border-radius: 10px;
+          padding: 10px;
+          width: 200px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+          }
+        }
+      }
+    }
+  }
+}
