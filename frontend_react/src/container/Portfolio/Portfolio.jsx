@@ -128,7 +128,7 @@ const Portfolio = () => {
 
   return (
     <>
-      <motion.div variants={textVariant()}>
+      <motion.div variants={textVariant()} className="app__portfolio-text">
         <p className="p-text">What I have made</p>
         <h2 className="head-text">
           Projects & <span>Portfolios</span>
