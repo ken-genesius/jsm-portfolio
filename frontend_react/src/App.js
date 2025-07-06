@@ -10,12 +10,14 @@ import {
   Testimonials,
   Work,
 } from "./container";
-import { Navbar } from "./components";
+import { Navbar, Footer, Sidebar } from "./components";
 
 const App = () => {
   return (
     <div className="app">
       <Navbar />
+      <Sidebar />
+      <Footer />
       <Header />
       <About />
       {/* <Work /> */}
