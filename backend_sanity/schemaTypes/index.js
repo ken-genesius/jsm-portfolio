@@ -4,6 +4,7 @@ import brands from './brands'
 import contact from './contact'
 import experiences from './experiences'
 import experiencesV2 from './experiencesV2'
+import headerSkills from './headerSkills'
 import portfolios from './portfolios'
 import skills from './skills'
 import techStacks from './techStacks'
@@ -17,6 +18,7 @@ export const schemaTypes = [
   contact,
   experiences,
   experiencesV2,
+  headerSkills,
   portfolios,
   skills,
   techStacks,
