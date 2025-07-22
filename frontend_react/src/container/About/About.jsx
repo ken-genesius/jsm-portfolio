@@ -42,9 +42,9 @@ const About = () => {
   return (
     <>
       <h2 className="head-text" style={{ marginTop: 10 }}>
-        I Know that <span>Good Development</span>
+        I Know that <span>Strong Development</span>
         <br />
-        means <span>Good Business</span>
+        Leads to <span>Strong Business</span>
       </h2>
 
       <div className="app__profiles">

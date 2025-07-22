@@ -1,15 +1,18 @@
 import "./Sidebar.scss";
 import React from "react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { HiDocument, HiDocumentText } from "react-icons/hi";
+import { TbFileCv } from "react-icons/tb";
 import { MdMail } from "react-icons/md";
 
 const Sidebar = () => {
   return (
     <div className="app__sidebar">
       <div>
-        <a target="_blank" href="https://linkedin.com/in/ken-genesius/">
-          <HiDocumentText />
+        <a
+          target="_blank"
+          href="https://drive.google.com/drive/folders/1oyH9WMPCAIhvwrGZI08i2KSlT5eTe6Hl?usp=sharing"
+        >
+          <TbFileCv />
         </a>
       </div>
       <div>
