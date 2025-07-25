@@ -50,33 +50,35 @@ const Single = ({ item }) => {
           <motion.div className="app__portfolio-textContainer" style={{ y }}>
             <h2>{item.title}</h2>
             <div className="app__portfolio-techstack-container">
-              {item.stacks.map((tStack, index) => (
-                <div
-                  className="app__portfolio-techstack"
-                  key={item.id + "-" + tStack.title + "-" + index}
-                >
-                  <img
-                    src={urlFor(tStack.iconUrl)}
-                    className="app__portfolio-techstack-icon"
-                    alt={tStack.title}
-                  />
-                  <span className="app__portfolio-techstack-title">
-                    {tStack.title}
-                  </span>
-                </div>
-              ))}
+              {item.stacks &&
+                item.stacks.map((tStack, index) => (
+                  <div
+                    className="app__portfolio-techstack"
+                    key={item.id + "-" + tStack.title + "-" + index}
+                  >
+                    <img
+                      src={urlFor(tStack.iconUrl)}
+                      className="app__portfolio-techstack-icon"
+                      alt={tStack.title}
+                    />
+                    <span className="app__portfolio-techstack-title">
+                      {tStack.title}
+                    </span>
+                  </div>
+                ))}
             </div>
             <p>{item.desc}</p>
             <div className="app__portfolio-point-container">
-              {item.points.map((point, index) => (
-                <div
-                  className="app__portfolio-point"
-                  key={item.id + "-points-" + index}
-                >
-                  <MdStars className="app__portfolio-point-icon" />
-                  <span className="app__portfolio-point-span">{point}</span>
-                </div>
-              ))}
+              {item.points &&
+                item.points.map((point, index) => (
+                  <div
+                    className="app__portfolio-point"
+                    key={item.id + "-points-" + index}
+                  >
+                    <MdStars className="app__portfolio-point-icon" />
+                    <span className="app__portfolio-point-span">{point}</span>
+                  </div>
+                ))}
             </div>
           </motion.div>
         </div>
@@ -89,7 +91,7 @@ const Portfolio = () => {
   const [portfolios, setPortfolios] = useState([]);
 
   useEffect(() => {
-    const query = '*[_type == "portfolios"] | order(order asc)';
+    const query = '*[_type == "portfolios"] | order(order desc)';
 
     client.fetch(query).then((data) => {
       setPortfolios(data);
