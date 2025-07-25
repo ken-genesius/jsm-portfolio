@@ -7,8 +7,6 @@ import { urlFor, client } from "../../client";
 import "./Skills.scss";
 
 const Skills = () => {
-  const [experience, setExperience] = useState([]);
-
   const [skills, setSkills] = useState([]);
 
   const textVariant = (delay) => {
@@ -30,12 +28,7 @@ const Skills = () => {
   };
 
   useEffect(() => {
-    const query = '*[_type == "experiences"]';
-    const skillsQuery = '*[_type == "skills"]';
-
-    client.fetch(query).then((data) => {
-      setExperience(data);
-    });
+    const skillsQuery = '*[_type == "skills"] | order(order desc)';
 
     client.fetch(skillsQuery).then((data) => {
       setSkills(data);
