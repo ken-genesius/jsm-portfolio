@@ -176,6 +176,11 @@
   }
 }
 
+section {
+  height: 100vh;
+  scroll-snap-align: center;
+}
+
 @media screen and (max-width: 500px) {
   .app__navigation,
   .app__social {
@@ -184,5 +189,23 @@
 
   .copyright {
     padding: 2rem;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 738px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: 1366px) {
+    @content;
   }
 }

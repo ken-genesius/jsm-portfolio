@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import './About.scss';
-import { urlFor, client } from '../../client';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import "./About.scss";
+import { urlFor, client } from "../../client";
 
-import { AppWrap, MotionWrap } from '../../wrapper';
+import { AppWrap, MotionWrap } from "../../wrapper";
 
-import { images } from '../../constants'
+import { images } from "../../constants";
 
 // const abouts = [
 //   {
@@ -31,48 +31,49 @@ import { images } from '../../constants'
 // ]
 
 const About = () => {
-
   const [abouts, setAbouts] = useState([]);
 
   useEffect(() => {
-    const query = '*[_type == "abouts"]';
+    const query = '*[_type == "abouts"] | order(order asc)';
 
     client.fetch(query).then((data) => setAbouts(data));
   }, []);
 
   return (
     <>
-      <h2 className='head-text'>
-        I Know that <span>Good Development</span>
-        <br/>
-        means <span>Good Business</span>
+      <h2 className="head-text" style={{ marginTop: 10 }}>
+        I Know that <span>Strong Development</span>
+        <br />
+        Leads to <span>Strong Business</span>
       </h2>
 
-      <div className='app__profiles'>
+      <div className="app__profiles">
         {abouts.map((about, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
-            whileHover={{ scale: 0.9 }}
-            transition={{ duration: 0.5, type: 'tween' }}
-            className='app__profile-item'
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.25, type: "tween" }}
+            className="app__profile-item"
             key={about.title + index}
           >
             <img src={urlFor(about.imgUrl)} alt={about.title} />
-            <h2 className="bold-text" style={{ marginTop: 20}}>
-              {about.title}
-            </h2>
-            <p className="p-text" style={{ marginTop: 10}}>
-              {about.description}
-            </p>
+            <motion.div className="app__profile-item-layer">
+              <h2 className="bold-text" style={{ marginTop: 20 }}>
+                {about.title}
+              </h2>
+              <p className="p-text" style={{ marginTop: 10 }}>
+                {about.description}
+              </p>
+            </motion.div>
           </motion.div>
         ))}
       </div>
     </>
-  )
-  
-}
+  );
+};
 
 export default AppWrap(
-    MotionWrap(About, 'app__about'), 
-    'about',
-  'app__whitebg');
+  MotionWrap(About, "app__about"),
+  "about",
+  "app__whitebg"
+);

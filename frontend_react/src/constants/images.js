@@ -14,6 +14,7 @@ import hero_cropped from "../assets/hero_cropped.png";
 import html from "../assets/html.png";
 import java from "../assets/java.png";
 import javascript from "../assets/javascript.png";
+import meta from "../assets/meta.png";
 import mu5 from "../assets/mu5.png";
 import node from "../assets/node.png";
 import postgresql from "../assets/postgresql.png";
@@ -38,8 +39,11 @@ import amazon from "../assets/amazon.png";
 import asus from "../assets/asus.png";
 import bolt from "../assets/bolt.png";
 import nb from "../assets/nb.png";
+import shopify from "../assets/shopify.png";
 import skype from "../assets/skype.png";
 import spotify from "../assets/spotify.png";
+import starbucks from "../assets/starbucks.png";
+import tesla from "../assets/tesla.png";
 
 export default {
   email,
@@ -81,4 +85,8 @@ export default {
   nb,
   skype,
   spotify,
+  starbucks,
+  tesla,
+  shopify,
+  meta,
 };

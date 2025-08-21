@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { easeInOut, motion } from "framer-motion";
 import { images } from "../../constants";
+import { FaLinkedin } from "react-icons/fa";
+import { TbFileCv } from "react-icons/tb";
+import { urlFor, client } from "../../client";
 import "./Header.scss";
 
 import { AppWrap } from "../../wrapper";
@@ -17,6 +20,16 @@ const scaleVariants = {
 };
 
 const Header = () => {
+  const [skills, setSkills] = useState([]);
+
+  useEffect(() => {
+    const skillsQuery = '*[_type == "headerSkills"] | order(order asc)';
+
+    client.fetch(skillsQuery).then((data) => {
+      setSkills(data);
+    });
+  }, []);
+
   return (
     <div className="app__header app__flex">
       <motion.div
@@ -26,7 +39,7 @@ const Header = () => {
       >
         <div className="app__header-badge">
           <div className="badge-cmp app__flex">
-            <span>👋</span>
+            <span className="wave-hand">👋</span>
             <div style={{ marginLeft: 20 }}>
               <p className="p-text">Hello, I am</p>
               <h1 className="head-text">Ken Genesius</h1>
@@ -37,6 +50,22 @@ const Header = () => {
             <p className="p-text">Software Engineer</p>
             <p className="p-text">Team Lead</p>
             <p className="p-text">Project Manager</p>
+          </div>
+          <div className="button-cmp app__flex">
+            <a
+              className="linkedin-cmp"
+              target="_blank"
+              href="https://linkedin.com/in/ken-genesius/"
+            >
+              <FaLinkedin /> LinkedIn
+            </a>
+            <a
+              className="cv-cmp"
+              target="_blank"
+              href="https://drive.google.com/drive/folders/1oyH9WMPCAIhvwrGZI08i2KSlT5eTe6Hl?usp=sharing"
+            >
+              <TbFileCv /> Download CV
+            </a>
           </div>
         </div>
       </motion.div>
@@ -66,15 +95,13 @@ const Header = () => {
         className="app__header-circles"
       >
         <div className="circle-div">
-          {[
-            images.java,
-            images.python,
-            images.postgresql,
-            images.flutter,
-            images.csharp,
-          ].map((circle, index) => (
-            <div className="circle-cmp app__flex" key={`circle-${index}`}>
-              <img src={circle} alt="circle" />
+          {skills.map((skill, index) => (
+            <div
+              className="circle-cmp app__flex"
+              style={{ backgroundColor: skill.bgColor }}
+              key={`circle-${index}`}
+            >
+              <img src={urlFor(skill.icon)} alt="top-skills" />
             </div>
           ))}
         </div>
